@@ -2,7 +2,6 @@ let api_keys  = require('./api_keys.json');
 let request = require('request');
 
 let api_key = api_keys.open_weather;
-let city = 'vancouver,ca';
 let lat = 49.255752;
 let lon = -123.107427;
 
