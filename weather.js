@@ -3,7 +3,10 @@ let request = require('request');
 
 let api_key = api_keys.open_weather;
 let city = 'vancouver,ca';
-let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}`;
+let lat = 49.255752;
+let lon = -123.107427;
+
+let url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}`;
 
 request(url, function (err, response, body) {
     if(err){
