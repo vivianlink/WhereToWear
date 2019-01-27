@@ -1,8 +1,8 @@
+<h1>Angular 2 + Google Maps Places Autocomplete</h1>
 <div class="container">
-  <h1>Angular 2 + Google Maps Places Autocomplete</h1>
-  <div class="form-group">
-    <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-  </div>
+  <mat-form-field>
+    <input matInput placeholder="Enter a city" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="city-input" #search [formControl]="searchControl">
+  </mat-form-field>
 </div>
 
 <router-outlet></router-outlet>
