@@ -104,6 +104,8 @@ export class AppComponent implements OnInit {
           this.photos.push(photo);
         }
       }
+
+      window.photos = this.photos;
       this.photosAreLoading = false;
     });
   }
