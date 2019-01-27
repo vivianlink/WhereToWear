@@ -105,7 +105,7 @@ export class AppComponent implements OnInit {
         }
       }
 
-      window.photos = this.photos;
+      window['photos'] = this.photos;
       this.photosAreLoading = false;
     });
   }
