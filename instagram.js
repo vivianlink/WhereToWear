@@ -13,19 +13,24 @@ async function quickstart(images) {
     const vision_client = new vision.ImageAnnotatorClient();
 
     let response = [];
+    let found_count = 0;
 
     for (let i=0; i<images.length; i++){
         let image = images[i].url;
         const [result] = await vision_client.labelDetection(image);
         const labels = result.labelAnnotations;
 
-        for (let i=0; i<labels.length; i++){
-            console.log(labels[i].description);
-            if (response.length >= 2){
-                return response;
+        console.log('labels =', JSON.stringify(labels));
+        for (let j=0; j<labels.length; j++){
+            // console.log(labels[i].description);
+            if (found_count >= 20){
+                return images;
             }
-            if (labels[i].description === 'People' || ((labels[i].description).toLowerCase()).includes('human') ){
-                response.push(image);
+            if (labels[j].description === 'People' || ((labels[j].description).toLowerCase()).includes('human') ){
+                images[i].labels = labels;
+                found_count++;
+                console.log("Added label to image " + i);
+                // response.push(image);
                 break;
             }
         }
@@ -78,12 +83,16 @@ module.exports = {
                                 if (got_count == total_count){
                                     // console.log("Finished!", images);
 
-                                    quickstart(images).then(function(peopleImg){ console.log(peopleImg)}).catch(console.error);
+                                    quickstart(images).then(function(new_images){
+                                        console.log("Got everything!", new_images)
+                                        mongo_access.addLocationWithRecords(lat, lng, new_images).then(() => {
+                                            console.log("Inserted successfully.")
+                                        });
+                                        resolve(new_images);
+                                    }).catch(console.error);
 
-                                    mongo_access.addLocationWithRecords(lat, lng, images).then(() => {
-                                        console.log("Inserted successfully.")
-                                    });
-                                    resolve(images);
+
+
                                 } else console.log(got_count + '/' + total_count);
                             });
                         }
