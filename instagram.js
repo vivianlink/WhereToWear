@@ -20,7 +20,8 @@ async function quickstart(images) {
         const [result] = await vision_client.labelDetection(image);
         const labels = result.labelAnnotations;
 
-        console.log('labels =', JSON.stringify(labels));
+        // console.log('labels =', JSON.stringify(labels));
+        console.log("On image " + i + " of " + images.length);
         for (let j=0; j<labels.length; j++){
             // console.log(labels[i].description);
             // if (found_count >= 20){
