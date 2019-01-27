@@ -32,9 +32,9 @@ export class AppComponent implements OnInit {
   private lng = 123;
   private date: Date = new Date();
 
-  private photosAreLoading = false;
+  public photosAreLoading = false;
 
-  private weather: Weather;
+  public weather: Weather;
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
