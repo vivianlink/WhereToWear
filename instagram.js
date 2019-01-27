@@ -44,10 +44,7 @@ module.exports = {
                 resolve(records);
             }, function(){
                 console.log("Mongo miss. Making a call to Instagram API.");
-                client.login().then(() => {
-                    console.log("Got here");
-                    return client.locationSearch({latitude: lat, longitude: lng});
-                }).then(data => {
+                client.locationSearch({latitude: lat, longitude: lng}).then(data => {
                     console.log("Got here");
                     return new Promise((res, rej) => {
                         let to_ret = [];
