@@ -12,7 +12,7 @@ import {
   MatDatepickerModule,
   MatGridListModule,
   MatInputModule,
-  MatListModule, MatNativeDateModule
+  MatListModule, MatNativeDateModule, MatProgressSpinnerModule
 } from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -34,6 +34,7 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDxOGO-_rQpm91MFBYGNGb9S5bYtB8TOIw',
       libraries: ['places']

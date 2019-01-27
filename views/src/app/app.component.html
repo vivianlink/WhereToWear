@@ -27,12 +27,14 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <button mat-button (click)="getPhotos()">Get photos</button>
   </div>
 
 </div>
 
-<mat-grid-list cols="5" rowHeight="1:1">
+<div *ngIf="photosAreLoading" style="text-align: center;">
+  <mat-spinner style="display: inline-block; margin-top: 150px;"></mat-spinner>
+</div>
+<mat-grid-list *ngIf="!photosAreLoading" cols="5" rowHeight="1:1">
   <mat-grid-tile *ngFor="let photo of photos | slice:0:120">
     <img src="{{photo.url}}" alt="photo" class="photo">
   </mat-grid-tile>

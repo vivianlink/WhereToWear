@@ -32,6 +32,8 @@ export class AppComponent implements OnInit {
   private lng = 123;
   private date: Date = new Date();
 
+  private photosAreLoading = false;
+
   private weather: Weather;
 
   @ViewChild('search')
@@ -58,6 +60,8 @@ export class AppComponent implements OnInit {
 
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
+
+          this.getPhotos();
         });
       });
     });
@@ -69,9 +73,11 @@ export class AppComponent implements OnInit {
   }
 
   getPhotos() {
+    this.photosAreLoading = true;
+
     this.photosService.getPhotos(this.lng, this.lat).subscribe((data: Photo[]) => {
       this.photos = data;
-      console.log(this.photos);
+      this.photosAreLoading = false;
     });
   }
 
