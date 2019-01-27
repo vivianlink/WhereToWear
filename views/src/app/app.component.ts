@@ -123,7 +123,7 @@ export class AppComponent implements OnInit {
         this.weather.icon = 'assets/sun.png';
       } else if (description.includes("snow")) {
         this.weather.icon = 'assets/snowflake.png';
-      } else if (description.includes("rain") || description.includes("storm")) {
+      } else if (description.includes("rain") || description.includes("storm") || description.includes("drizzle"))  {
         this.weather.icon= 'assets/rain.png';
       } else {
         this.weather.icon = 'assets/cloud.png';
