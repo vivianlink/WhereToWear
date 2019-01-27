@@ -3,9 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "concurrently \"npm run serve-backend\" \"npm run serve-frontend\"",
+    "serve-backend": "node ./bin/www",
+    "serve-frontend": "cd views && ng serve --proxy-config proxy.config.json"
   },
   "dependencies": {
+    "@google-cloud/vision": "^0.24.0",
+    "concurrently": "^4.1.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
@@ -13,6 +17,21 @@
     "instafeed.js": "^1.4.1",
     "instagram-web-api": "^2.0.0",
     "jade": "~1.11.0",
-    "morgan": "~1.9.0"
-  }
+    "morgan": "~1.9.0",
+    "request": "^2.88.0"
+  },
+  "description": "nwHacks2019",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivianlink/WhereToWear.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vivianlink/WhereToWear/issues"
+  },
+  "homepage": "https://github.com/vivianlink/WhereToWear#readme"
 }
