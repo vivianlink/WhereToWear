@@ -62,6 +62,7 @@ export class AppComponent implements OnInit {
           this.lng = place.geometry.location.lng();
 
           this.getPhotos();
+          this.getWeather();
         });
       });
     });
