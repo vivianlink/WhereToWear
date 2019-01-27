@@ -4,13 +4,8 @@ const api_keys  = require('./api_keys.json');
 const client = new instagram_api({username:api_keys.instagram_login.username,password:api_keys.instagram_login.password});
 client.login();
 
-function getpho(){
 
-}
-
-return this;
-
-return {
+module.exports = {
     getPhotos: function(lat, lng){
         return new Promise((resolve, reject) => {
             client.login().then(() => {
