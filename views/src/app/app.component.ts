@@ -113,13 +113,13 @@ export class AppComponent implements OnInit {
       console.log(this.weather);
       let description = this.weather.description.toLowerCase();
       if (description.includes("clear") || description.includes("sunny")) {
-        this.weather.icon = "";
+        this.weather.icon = 'assets/sun.png';
       } else if (description.includes("snow")) {
-        this.weather.icon = "";
+        this.weather.icon = 'assets/snowflake.png';
       } else if (description.includes("rain") || description.includes("storm")) {
-        this.weather.icon= "";
+        this.weather.icon= 'assets/rain.png';
       } else {
-        this.weather.icon = "";
+        this.weather.icon = 'assets/cloud.png';
       }
     });
   }

@@ -6,6 +6,7 @@
 <div style="display: inline-block; float: right; position: absolute; right: 10px; top:10px " *ngIf="weather">
   <mat-card id="mat-card">
     <mat-card-content id="mat-card-content">
+      <img id="icon-img" src={{weather.icon}}>
       {{weather.avg}}°C
       <br>
       <br>
