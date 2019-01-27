@@ -1,4 +1,22 @@
-<h1>Angular 2 + Google Maps Places Autocomplete</h1>
+<div class="mat-display-3" style="display: inline">
+  Where to Wear
+</div>
+
+<div style="display: inline-block; float: right;" *ngIf="weather">
+  <mat-card>
+    <mat-card-content>
+      {{weather.avg}}°C
+      <br>
+      <br>
+      {{weather.description | titlecase}}
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<br>
+<br>
+<br>
+
 <div class="container">
   <div class="inner-container">
     <mat-form-field class="city-input-form">
