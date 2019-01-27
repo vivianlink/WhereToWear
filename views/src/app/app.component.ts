@@ -40,16 +40,20 @@ export class AppComponent implements OnInit {
   public searchElementRef: ElementRef;
 
   static areAcceptableLabels(labels): boolean {
+    const blockedKeywords = ['font', 'caption', 'settlement'];
+
     let isAcceptable = false;
 
     for (let i = 0; i < labels.length; i++) {
       const description = labels[i].description.toLowerCase();
 
-      if (description.includes('font') ||  description.includes('caption')){
-        return false;
+      for (let j = 0; j < blockedKeywords.length; j++) {
+        if (description.includes(blockedKeywords[j])) {
+          return false;
+        }
       }
 
-      if ((description.includes('people')) || (description.includes('human'))) {
+      if ((description === 'people') || (description === 'human')) {
         isAcceptable = true;
       }
     }
