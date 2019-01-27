@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var api_keys  = require('./api_keys.json');
+var insta = require('./instagram');
 var app = express();
 
 // view engine setup
@@ -28,6 +29,30 @@ app.use("/api/getWeather", function(req, res) {
   res.json({
     weather: "WEATHER OK"
   });
+});
+
+app.use("/api/getPhotos", function(req, res) {
+
+    if (!req.query){
+      res.status(400);
+      res.send("Invalid input");
+    } else if (!req.query.lat) {
+      res.status(400);
+      res.send("Invalid input, no lat.");
+    } else if (!req.query.lng) {
+      res.status(400);
+      res.send("Invalid input, no lng.");
+    }
+
+    insta.getPhotos(req.query.lat, req.query.lng).then(data => {
+        res.status(200);
+        res.json(data);
+    }).catch(e => {
+        res.status(500);
+        res.send("OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
+    });
+
+
 });
 
 // catch 404 and forward to error handler
