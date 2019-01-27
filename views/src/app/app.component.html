@@ -7,8 +7,10 @@
 
 </div>
 
-<mat-card *ngFor="let photo of photos | slice:0:20">
-  <img src="{{photo.url}}" alt="photo" class="photo">
-</mat-card>
+<mat-grid-list cols="5" rowHeight="1:1">
+  <mat-grid-tile *ngFor="let photo of photos | slice:0:20">
+    <img src="{{photo.url}}" alt="photo" class="photo">
+  </mat-grid-tile>
+</mat-grid-list>
 
 <router-outlet></router-outlet>
