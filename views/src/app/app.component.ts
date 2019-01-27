@@ -40,8 +40,15 @@ export class AppComponent implements OnInit {
   public searchElementRef: ElementRef;
 
   static areAcceptableLabels(labels): boolean {
+
     for (let i = 0; i < labels.length; i++) {
-      if (labels[i].description === 'People') {
+      let description = labels[i].description.toLowerCase();
+
+      if (description.includes('font') ||  description.includes('caption')){
+        return false;
+      }
+
+      if ((description.includes('people')) || (description.includes('human'))) {
         return true;
       }
     }
