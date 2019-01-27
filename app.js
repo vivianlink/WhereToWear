@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var Instafeed = require('instafeed.js');
-var api_keys  = require('../api_keys.json');
+var api_keys  = require('./api_keys.json');
 
 var app = express();
 
@@ -24,6 +24,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.use("/api/getWeather", function(req, res) {
+  res.status(200);
+  res.json({
+    weather: "WEATHER OK"
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
