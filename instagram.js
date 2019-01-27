@@ -22,19 +22,19 @@ function quickstart(images) {
     return new Promise((resolve, reject) => {
 
         for (let i = 0; i < images.length; i++){
-            let image = images[i];
-
-            console.log("Setting timeout for image " + i + " of " + images.length);
-            setTimeout(function(){
-                console.log("Calling image " + i + " of " + images.length);
-                vision_client.labelDetection(image.url).then(function(result){
-                    let labels = result.labelAnnotations;
-                    images[i].labels = labels;
-                    found_count++;
-                    // console.log("Finished image " + i + " of " + images.length + ". Total at " + found_count);
-                    if (found_count == (images.length - 1)) resolve(images);
-                });
-            }, Math.floor(i / 20) * 1000);
+            (function (index) {
+                console.log("Setting timeout for image " + index + " of " + images.length);
+                setTimeout(function(){
+                    console.log("Calling image " + index + " of " + images.length);
+                    vision_client.labelDetection(images[index].url).then(function(result){
+                        let labels = result[0].labelAnnotations;
+                        images[index].labels = labels;
+                        found_count++;
+                        console.log("Finished image " + index + " of " + images.length + ". Total at " + found_count);
+                        if (found_count == (images.length)) resolve(images);
+                    });
+                }, Math.floor(index / 20) * 1000);
+            })(i);
 
         }
 
@@ -82,21 +82,20 @@ module.exports = {
                                         time: image.node.taken_at_timestamp
                                     });
                                 }
+                            }).finally(() => {
                                 got_count++;
-                                if (got_count == (total_count - 1)){
+                                console.log(got_count + '/' + total_count);
+                                if (got_count === total_count){
                                     console.log("Finished getting images! Calling quickstart now");
 
                                     quickstart(images).then(function(new_images){
-                                        console.log("Got everything!", new_images)
+                                        console.log("Got everything!", new_images);
                                         mongo_access.addLocationWithRecords(lat, lng, new_images).then(() => {
                                             console.log("Inserted successfully.")
                                         });
                                         resolve(new_images);
                                     }).catch(console.error);
-
-
-
-                                } else console.log(got_count + '/' + total_count);
+                                }
                             });
                         }
                     });
