@@ -24,13 +24,14 @@ function quickstart(images) {
         for (let i = 0; i < images.length; i++){
             let image = images[i];
 
+            console.log("Setting timeout for image " + i + " of " + images.length);
             setTimeout(function(){
                 console.log("Calling image " + i + " of " + images.length);
                 vision_client.labelDetection(image.url).then(function(result){
                     let labels = result.labelAnnotations;
                     images[i].labels = labels;
                     found_count++;
-                    console.log("Finished image " + i + " of " + images.length + ". Total at " + found_count);
+                    // console.log("Finished image " + i + " of " + images.length + ". Total at " + found_count);
                     if (found_count == (images.length - 1)) resolve(images);
                 });
             }, Math.floor(i / 20) * 1000);
