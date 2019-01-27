@@ -6,7 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatGridListModule, MatInputModule, MatListModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatGridListModule,
+  MatInputModule,
+  MatListModule, MatNativeDateModule
+} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -25,6 +32,8 @@ import {HttpClientModule} from '@angular/common/http';
     MatCardModule,
     MatGridListModule,
     AppRoutingModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDxOGO-_rQpm91MFBYGNGb9S5bYtB8TOIw',
       libraries: ['places']

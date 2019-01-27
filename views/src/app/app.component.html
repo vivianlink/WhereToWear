@@ -1,9 +1,16 @@
 <h1>Angular 2 + Google Maps Places Autocomplete</h1>
 <div class="container">
-  <mat-form-field>
-    <input matInput placeholder="Enter a city" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="city-input" #search [formControl]="searchControl">
-  </mat-form-field>
-  <button mat-button (click)="getPhotos()">Get photos</button>
+  <div class="inner-container">
+    <mat-form-field class="city-input-form">
+      <input matInput placeholder="Enter a city" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="city-input" #search [formControl]="searchControl">
+    </mat-form-field>
+    <mat-form-field class="date-input-form">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button mat-button (click)="getPhotos()">Get photos</button>
+  </div>
 
 </div>
 

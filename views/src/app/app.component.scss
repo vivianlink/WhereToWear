@@ -1,10 +1,23 @@
 .container {
   width: 100%;
 
-  mat-form-field {
+  .inner-container {
     display: block;
     margin: auto;
-    width: 80%;
+    text-align: center;
+  }
+
+  mat-form-field {
+    &.city-input-form {
+      padding: 20px;
+      display: inline-block;
+      width: 50%;
+    }
+
+    &.date-input-form {
+      display: inline-block;
+      width: 15%;
+    }
   }
 }
 
