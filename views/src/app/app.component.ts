@@ -111,6 +111,16 @@ export class AppComponent implements OnInit {
     this.weatherService.getWeather(this.lng, this.lat, this.date).subscribe((data: Weather) => {
       this.weather = data;
       console.log(this.weather);
+      let description = this.weather.description.toLowerCase();
+      if (description.includes("clear") || description.includes("sunny")) {
+        this.weather.icon = "";
+      } else if (description.includes("snow")) {
+        this.weather.icon = "";
+      } else if (description.includes("rain") || description.includes("storm")) {
+        this.weather.icon= "";
+      } else {
+        this.weather.icon = "";
+      }
     });
   }
 }

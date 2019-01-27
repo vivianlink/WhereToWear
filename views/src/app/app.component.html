@@ -1,11 +1,11 @@
-<img src="assets/logo.png" alt="" style="display: inline;height: 50px;">
-<div class="mat-display-3" style="display: inline">
-  Where to Wear
+<div style="text-align: center; padding-top: 30px">
+  <div id ="title" class="mat-display-3" style="display: inline">
+    Where <img src="assets/logo.png" alt="" style="display: inline;height: 90px;"> Wear
+  </div>
 </div>
-
-<div style="display: inline-block; float: right;" *ngIf="weather">
-  <mat-card>
-    <mat-card-content>
+<div style="display: inline-block; float: right; position: absolute; right: 10px; top:10px " *ngIf="weather">
+  <mat-card id="mat-card">
+    <mat-card-content id="mat-card-content">
       {{weather.avg}}°C
       <br>
       <br>
