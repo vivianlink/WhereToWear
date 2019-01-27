@@ -40,20 +40,21 @@ export class AppComponent implements OnInit {
   public searchElementRef: ElementRef;
 
   static areAcceptableLabels(labels): boolean {
+    let isAcceptable = false;
 
     for (let i = 0; i < labels.length; i++) {
-      let description = labels[i].description.toLowerCase();
+      const description = labels[i].description.toLowerCase();
 
       if (description.includes('font') ||  description.includes('caption')){
         return false;
       }
 
       if ((description.includes('people')) || (description.includes('human'))) {
-        return true;
+        isAcceptable = true;
       }
     }
 
-    return false;
+    return isAcceptable;
   }
 
   ngOnInit() {
