@@ -15,7 +15,10 @@
 
 'use strict';
 
+let peopleImg = [];
+let img = "https://scontent-sea1-1.cdninstagram.com/vp/41655379f7851befa26ec4550f3e5550/5CF50B92/t51.2885-15/e35/40196752_1078216332353835_2667629686766436352_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com";
 // [START vision_quickstart]
+
 async function quickstart() {
     // Imports the Google Cloud client library
     const vision = require('@google-cloud/vision');
@@ -27,9 +30,15 @@ async function quickstart() {
 
     const [result] = await client.labelDetection('https://scontent-sea1-1.cdninstagram.com/vp/41655379f7851befa26ec4550f3e5550/5CF50B92/t51.2885-15/e35/40196752_1078216332353835_2667629686766436352_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com');
     const labels = result.labelAnnotations;
-    console.log('Labels:');
-    labels.forEach(label => console.log(label.description));
-}
-// [END vision_quickstart]
 
-quickstart().catch(console.error);
+    for (let i= 0; i <labels.length; i++){
+
+        if (labels[i].description === 'People'){
+            peopleImg.push(img)
+        }
+    }
+    return peopleImg
+}
+
+// [END vision_quickstart]
+quickstart().then(function(peopleImg){ console.log(peopleImg)}).catch(console.error);
