@@ -29,12 +29,15 @@ app.use("/api/getCurrentWeather", function(req, res) {
     if (!req.query) {
         res.status(400);
         res.send("Invalid input");
+        return;
     } else if (!req.query.lat) {
         res.status(400);
         res.send("Invalid input, no lat.");
+        return;
     } else if (!req.query.lng) {
         res.status(400);
         res.send("Invalid input, no lng.");
+        return;
     }
 
     weather.getCurrentWeather(req.query.lat, req.query.lng, function(error, data) {
@@ -56,15 +59,19 @@ app.use("/api/getWeatherOf", function(req, res) {
     if (!req.query) {
         res.status(400);
         res.send("Invalid input");
+        return;
     } else if (!req.query.lat) {
         res.status(400);
         res.send("Invalid input, no lat.");
+        return;
     } else if (!req.query.lng) {
         res.status(400);
         res.send("Invalid input, no lng.");
+        return;
     } else if (!req.query.date) {
         res.status(400);
         res.send("Invalid input, no date.");
+        return;
     }
 
 
@@ -85,12 +92,15 @@ app.use("/api/getPhotos", function(req, res) {
     if (!req.query) {
       res.status(400);
       res.send("Invalid input");
+      return;
     } else if (!req.query.lat) {
       res.status(400);
       res.send("Invalid input, no lat.");
+      return;
     } else if (!req.query.lng) {
       res.status(400);
       res.send("Invalid input, no lng.");
+      return;
     }
 
     let still_going_interval = setInterval(function(){
