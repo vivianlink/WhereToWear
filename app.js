@@ -7,9 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var Instafeed = require('instafeed.js');
 var api_keys  = require('./api_keys.json');
-
 var app = express();
 
 // view engine setup
