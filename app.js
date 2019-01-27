@@ -94,7 +94,7 @@ app.use("/api/getPhotos", function(req, res) {
     }
 
     let still_going_interval = setInterval(function(){
-        res.status(100);
+        // res.status(100);
     }, 30 * 1000);
 
     insta.getPhotos(req.query.lat, req.query.lng).then(data => {
