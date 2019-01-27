@@ -3,6 +3,8 @@ import { ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {  } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
+import { PhotosService } from './photos.service';
+import {Photo} from "./photo";
 
 @Component({
   selector: 'app-root',
@@ -12,6 +14,8 @@ import { MapsAPILoader } from '@agm/core';
 
 export class AppComponent implements OnInit {
 
+  private photos: Photo[];
+
   public searchControl: FormControl;
 
   @ViewChild('search')
@@ -19,7 +23,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private photosService: PhotosService
   ) {}
 
   ngOnInit() {
@@ -49,6 +54,13 @@ export class AppComponent implements OnInit {
           console.log(coords);
         });
       });
+    });
+  }
+
+  getPhotos() {
+    this.photosService.getPhotos(0, 0).subscribe((data: Photo[]) => {
+      this.photos = data;
+      console.log(this.photos);
     });
   }
 }
