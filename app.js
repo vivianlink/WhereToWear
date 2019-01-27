@@ -93,12 +93,18 @@ app.use("/api/getPhotos", function(req, res) {
       res.send("Invalid input, no lng.");
     }
 
+    let still_going_interval = setInterval(function(){
+        res.status(100);
+    }, 30 * 1000);
+
     insta.getPhotos(req.query.lat, req.query.lng).then(data => {
         res.status(200);
         res.json(data);
     }).catch(e => {
         res.status(500);
         res.send("OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")
+    }).finally(() => {
+        clearInterval(still_going_interval);
     });
 
 
