@@ -8,6 +8,7 @@
     "serve-frontend": "cd views && ng serve --proxy-config proxy.config.json"
   },
   "dependencies": {
+    "@angular/cli": "^7.2.3",
     "@google-cloud/vision": "^0.24.0",
     "concurrently": "^4.1.0",
     "cookie-parser": "~1.4.3",

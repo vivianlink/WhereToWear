@@ -22,20 +22,21 @@ async function quickstart(images) {
 
         // console.log('labels =', JSON.stringify(labels));
         console.log("On image " + i + " of " + images.length);
-        for (let j=0; j<labels.length; j++){
-            // console.log(labels[i].description);
-            // if (found_count >= 20){
-            //     return images;
-            // }
-            images[i].labels = labels;
-            // if (labels[j].description === 'People' || ((labels[j].description).toLowerCase()).includes('human') ){
-            //
-            //     found_count++;
-            //     console.log("Added label to image " + i);
-            //     // response.push(image);
-            //     break;
-            // }
-        }
+        images[i].labels = labels;
+        // for (let j=0; j<labels.length; j++){
+        //     // console.log(labels[i].description);
+        //     // if (found_count >= 20){
+        //     //     return images;
+        //     // }
+        //
+        //     // if (labels[j].description === 'People' || ((labels[j].description).toLowerCase()).includes('human') ){
+        //     //
+        //     //     found_count++;
+        //     //     console.log("Added label to image " + i);
+        //     //     // response.push(image);
+        //     //     break;
+        //     // }
+        // }
     }
 
     return images;
