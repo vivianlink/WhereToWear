@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 
 var api_keys  = require('./api_keys.json');
 var insta = require('./instagram');
+var weather = require('./weather.js');
 var app = express();
 
 // view engine setup
@@ -24,11 +25,59 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.use("/api/getWeather", function(req, res) {
-  res.status(200);
-  res.json({
-    weather: "WEATHER OK"
-  });
+app.use("/api/getCurrentWeather", function(req, res) {
+    if (!req.query) {
+        res.status(400);
+        res.send("Invalid input");
+    } else if (!req.query.lat) {
+        res.status(400);
+        res.send("Invalid input, no lat.");
+    } else if (!req.query.lng) {
+        res.status(400);
+        res.send("Invalid input, no lng.");
+    }
+
+    weather.getCurrentWeather(req.query.lat, req.query.lng, function(error, data) {
+        if (error) {
+            res.status(500);
+            console.log("error:", error.toString());
+            res.send("Unknown error happened, check server logs");
+            return;
+        }
+
+        res.status(200);
+        res.json(data);
+    });
+});
+
+app.use("/api/getWeatherOf", function(req, res) {
+
+    if (!req.query) {
+        res.status(400);
+        res.send("Invalid input");
+    } else if (!req.query.lat) {
+        res.status(400);
+        res.send("Invalid input, no lat.");
+    } else if (!req.query.lng) {
+        res.status(400);
+        res.send("Invalid input, no lng.");
+    } else if (!req.query.date) {
+        res.status(400);
+        res.send("Invalid input, no date.");
+    }
+
+
+    weather.getWeatherOf(req.query.lat, req.query.lng, parseInt(req.query.date), function(error, data) {
+        if (error) {
+            res.status(500);
+            console.log("error:", error.toString());
+            res.send("Unknown error happened, check server logs");
+            return;
+        }
+
+        res.status(200);
+        res.json(data);
+    });
 });
 
 app.use("/api/getPhotos", function(req, res) {

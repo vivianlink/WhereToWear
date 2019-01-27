@@ -5,6 +5,9 @@ import {  } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { PhotosService } from './photos.service';
 import {Photo} from "./photo";
+import {MatDatepickerInputEvent} from "@angular/material";
+import {WeatherService} from "./weather.service";
+import {Weather} from "./weather";
 
 @Component({
   selector: 'app-root',
@@ -14,18 +17,25 @@ import {Photo} from "./photo";
 
 export class AppComponent implements OnInit {
 
+  constructor(
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
+    private photosService: PhotosService,
+    private weatherService: WeatherService
+  ) {}
+
   private photos: Photo[];
 
   public searchControl: FormControl;
 
+  private lat = 123;
+  private lng = 49;
+  private date: Date = new Date();
+
+  private weather: Weather;
+
   @ViewChild('search')
   public searchElementRef: ElementRef;
-
-  constructor(
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone,
-    private photosService: PhotosService
-  ) {}
 
   ngOnInit() {
     // create search FormControl
@@ -46,21 +56,29 @@ export class AppComponent implements OnInit {
             return;
           }
 
-          const coords = {
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-          };
-
-          console.log(coords);
+          this.lat = place.geometry.location.lat();
+          this.lng = place.geometry.location.lng();
         });
       });
     });
+  }
+
+  dateChanged(event: MatDatepickerInputEvent<Date>) {
+    this.date = event.value;
+    this.getWeather();
   }
 
   getPhotos() {
     this.photosService.getPhotos(0, 0).subscribe((data: Photo[]) => {
       this.photos = data;
       console.log(this.photos);
+    });
+  }
+
+  getWeather() {
+    this.weatherService.getWeather(this.lat, this.lng, this.date).subscribe((data: Weather) => {
+      this.weather = data;
+      console.log(this.weather);
     });
   }
 }
