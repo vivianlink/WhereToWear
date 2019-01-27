@@ -1,3 +1,4 @@
+<img src="assets/logo.png" alt="" style="display: inline;height: 50px;">
 <div class="mat-display-3" style="display: inline">
   Where to Wear
 </div>
@@ -31,11 +32,13 @@
 
 </div>
 
+<mat-spinner style="opacity: 0; position: absolute;"></mat-spinner>
+
 <div *ngIf="photosAreLoading" style="text-align: center;">
   <mat-spinner style="display: inline-block; margin-top: 150px;"></mat-spinner>
 </div>
 <mat-grid-list *ngIf="!photosAreLoading" cols="5" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let photo of photos | slice:0:120">
+  <mat-grid-tile *ngFor="let photo of photos | slice:0:180">
     <img src="{{photo.url}}" alt="photo" class="photo">
   </mat-grid-tile>
 </mat-grid-list>
