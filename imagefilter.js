@@ -31,11 +31,15 @@ async function quickstart() {
         const labels = result.labelAnnotations;
 
         for (let i=0; i<labels.length; i++){
-            console.log(labels[i].description);
+            let description = labels[i].description;
+            console.log(description);
             if (peopleImg.length >= 2){
                 return peopleImg;
             }
-            if (labels[i].description === 'People' || ((labels[i].description).toLowerCase()).includes('human') ){
+            if (description.toLowerCase().includes('font') ||  description.toLowerCase().includes('caption')){
+                break;
+            }
+            if (description === 'People' || (description).toLowerCase()).includes('human') ){
                 peopleImg.push(image);
                 break;
             }
