@@ -6,40 +6,39 @@ const vision = require('@google-cloud/vision');
 const client = new instagram_api({username:api_keys.instagram_login.username,password:api_keys.instagram_login.password});
 client.login();
 
-async function quickstart(images) {
+function quickstart(images) {
     // Imports the Google Cloud client library
-
+    console.log("Quickstart started")
     // Creates a client
     const vision_client = new vision.ImageAnnotatorClient();
 
     let response = [];
     let found_count = 0;
 
-    for (let i=0; i<images.length; i++){
-        let image = images[i].url;
-        const [result] = await vision_client.labelDetection(image);
-        const labels = result.labelAnnotations;
+    let queue = [];
 
-        // console.log('labels =', JSON.stringify(labels));
-        console.log("On image " + i + " of " + images.length);
-        images[i].labels = labels;
-        // for (let j=0; j<labels.length; j++){
-        //     // console.log(labels[i].description);
-        //     // if (found_count >= 20){
-        //     //     return images;
-        //     // }
-        //
-        //     // if (labels[j].description === 'People' || ((labels[j].description).toLowerCase()).includes('human') ){
-        //     //
-        //     //     found_count++;
-        //     //     console.log("Added label to image " + i);
-        //     //     // response.push(image);
-        //     //     break;
-        //     // }
-        // }
-    }
+    console.log("Quickstart started")
 
-    return images;
+    return new Promise((resolve, reject) => {
+
+        for (let i = 0; i < images.length; i++){
+            let image = images[i];
+
+            setTimeout(function(){
+                console.log("Calling image " + i + " of " + images.length);
+                vision_client.labelDetection(image.url).then(function(result){
+                    let labels = result.labelAnnotations;
+                    images[i].labels = labels;
+                    found_count++;
+                    console.log("Finished image " + i + " of " + images.length + ". Total at " + found_count);
+                    if (found_count == (images.length - 1)) resolve(images);
+                });
+            }, Math.floor(i / 20) * 1000);
+
+        }
+
+    });
+
 }
 
 
@@ -83,8 +82,8 @@ module.exports = {
                                     });
                                 }
                                 got_count++;
-                                if (got_count == total_count){
-                                    // console.log("Finished!", images);
+                                if (got_count == (total_count - 1)){
+                                    console.log("Finished getting images! Calling quickstart now");
 
                                     quickstart(images).then(function(new_images){
                                         console.log("Got everything!", new_images)
