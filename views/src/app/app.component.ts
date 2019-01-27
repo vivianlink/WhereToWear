@@ -12,10 +12,7 @@ import { MapsAPILoader } from '@agm/core';
 
 export class AppComponent implements OnInit {
 
-  public latitude: number;
-  public longitude: number;
   public searchControl: FormControl;
-  public zoom: number;
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
@@ -26,16 +23,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // set google maps defaults
-    this.zoom = 10;
-    this.latitude = 49;
-    this.longitude = -122.5795;
-
     // create search FormControl
     this.searchControl = new FormControl();
-
-    // set current position
-    this.setCurrentPosition();
 
     // load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
@@ -52,22 +41,14 @@ export class AppComponent implements OnInit {
             return;
           }
 
-          // set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
+          const coords = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+          };
+
+          console.log(coords);
         });
       });
     });
-  }
-
-  private setCurrentPosition() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 12;
-      });
-    }
   }
 }
