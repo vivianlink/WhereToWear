@@ -3,6 +3,14 @@
   <mat-form-field>
     <input matInput placeholder="Enter a city" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="city-input" #search [formControl]="searchControl">
   </mat-form-field>
+  <button mat-button (click)="getPhotos()">Get photos</button>
+
 </div>
+
+<mat-grid-list cols="5" rowHeight="1:1">
+  <mat-grid-tile *ngFor="let photo of photos | slice:0:20">
+    <img src="{{photo.url}}" alt="photo" class="photo">
+  </mat-grid-tile>
+</mat-grid-list>
 
 <router-outlet></router-outlet>

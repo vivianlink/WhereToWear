@@ -6,7 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatGridListModule, MatInputModule, MatListModule} from '@angular/material';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,10 @@ import {MatButtonModule, MatInputModule} from '@angular/material';
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
+    HttpClientModule,
+    MatListModule,
+    MatCardModule,
+    MatGridListModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDxOGO-_rQpm91MFBYGNGb9S5bYtB8TOIw',
