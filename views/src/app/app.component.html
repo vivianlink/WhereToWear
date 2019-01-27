@@ -33,7 +33,7 @@
 </div>
 
 <mat-grid-list cols="5" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let photo of photos | slice:0:20">
+  <mat-grid-tile *ngFor="let photo of photos | slice:0:120">
     <img src="{{photo.url}}" alt="photo" class="photo">
   </mat-grid-tile>
 </mat-grid-list>

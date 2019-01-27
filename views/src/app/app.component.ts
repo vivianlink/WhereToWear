@@ -28,8 +28,8 @@ export class AppComponent implements OnInit {
 
   public searchControl: FormControl;
 
-  private lat = 123;
-  private lng = 49;
+  private lat = 49;
+  private lng = 123;
   private date: Date = new Date();
 
   private weather: Weather;
@@ -69,14 +69,14 @@ export class AppComponent implements OnInit {
   }
 
   getPhotos() {
-    this.photosService.getPhotos(0, 0).subscribe((data: Photo[]) => {
+    this.photosService.getPhotos(this.lng, this.lat).subscribe((data: Photo[]) => {
       this.photos = data;
       console.log(this.photos);
     });
   }
 
   getWeather() {
-    this.weatherService.getWeather(this.lat, this.lng, this.date).subscribe((data: Weather) => {
+    this.weatherService.getWeather(this.lng, this.lat, this.date).subscribe((data: Weather) => {
       this.weather = data;
       console.log(this.weather);
     });
