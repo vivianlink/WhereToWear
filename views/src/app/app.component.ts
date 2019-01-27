@@ -4,10 +4,10 @@ import { FormControl } from '@angular/forms';
 import {  } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { PhotosService } from './photos.service';
-import {Photo} from "./photo";
-import {MatDatepickerInputEvent} from "@angular/material";
-import {WeatherService} from "./weather.service";
-import {Weather} from "./weather";
+import {Photo} from './photo';
+import {MatDatepickerInputEvent} from '@angular/material';
+import {WeatherService} from './weather.service';
+import {Weather} from './weather';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +38,16 @@ export class AppComponent implements OnInit {
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
+
+  static areAcceptableLabels(labels): boolean {
+    for (let i = 0; i < labels.length; i++) {
+      if (labels[i].description === 'People') {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
   ngOnInit() {
     // create search FormControl
@@ -77,7 +87,15 @@ export class AppComponent implements OnInit {
     this.photosAreLoading = true;
 
     this.photosService.getPhotos(this.lng, this.lat).subscribe((data: Photo[]) => {
-      this.photos = data;
+      this.photos = [];
+
+      for (let i = 0; i < data.length; i++) {
+        const photo = data[i];
+
+        if (photo.labels && AppComponent.areAcceptableLabels(photo.labels)) {
+          this.photos.push(photo);
+        }
+      }
       this.photosAreLoading = false;
     });
   }
