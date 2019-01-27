@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
         }
       }
 
-      if ((description.includes('people')) || (description.includes('human'))) {
+      if ((description === 'people') || (description === 'human')) {
         isAcceptable = true;
       }
     }
